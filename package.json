@@ -1,0 +1,29 @@
+{
+  "name": "webpacktemplate",
+  "version": "1.0.0",
+  "description": "Complete webpack template",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env NODE_ENV=development webpack-dev-server --mode development --open",
+    "dev": "cross-env NODE_ENV=development webpack --mode development",
+    "build": "cross-env NODE_ENV=production webpack --mode production"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "clean-webpack-plugin": "^4.0.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^6.7.2",
+    "csv-loader": "^3.0.5",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.0",
+    "papaparse": "^5.3.2",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^4.1.0",
+    "webpack": "^5.75.0",
+    "webpack-cli": "^5.0.0",
+    "webpack-dev-server": "^4.11.1",
+    "xml-loader": "^1.2.1"
+  }
+}
