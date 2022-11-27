@@ -3,6 +3,10 @@ const HtmlWebpackPlugin      = require('html-webpack-plugin');
 const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const path                   = require('path');
 
+const production = process.env.NODE_ENV === 'production';
+const target     = !production ? 'web' : 'browserslist';
+const devtool    = !production ? 'source-map' : undefined;
+
 const optimization = () => {
     const config = {
         splitChunks: {
@@ -13,10 +17,12 @@ const optimization = () => {
 }
 
 module.exports = {
-    mode: 'development',
+    mode: production ? 'production' : 'development',
+    target,
+    devtool,
     entry: path.resolve(__dirname, './src/index.js'),
     output: {
-        filename: '[name].[contenthash].js',
+        filename: production ? '[name].[contenthash].js' : '[name].js',
         path: path.resolve(__dirname, './dist'),
     },
     resolve: {
@@ -26,6 +32,7 @@ module.exports = {
     devServer: {
         port: 3000,
         open: true,
+        hot: true,
     },
     plugins: [
         new HtmlWebpackPlugin({
@@ -34,15 +41,27 @@ module.exports = {
         }),
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
+            filename: production ? '[name].[contenthash].css' : '[name].css',
         }),
     ],
     module: {
         rules: [
             // CSS
             {
-                test: /\.css$/,
-                use: [MiniCssExtractPlugin.loader, 'css-loader'],
+                test: /\.(c|sa|sc)ss$/,
+                use: [
+                    !production ? 'style-loader' : MiniCssExtractPlugin.loader, 
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            postcssOptions: {
+                                plugins: [require('postcss-preset-env')],
+                            }
+                        }
+                    },
+                    'sass-loader',
+                ],
             },
             // Images & fonts
             {
