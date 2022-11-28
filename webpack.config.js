@@ -5,6 +5,7 @@ const path                   = require('path');
 const TerserWebpackPlugin    = require('terser-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
+const mode       = production ? 'production' : 'development';
 const target     = !production ? 'web' : 'browserslist';
 const devtool    = !production ? 'source-map' : undefined;
 
@@ -25,7 +26,7 @@ const optimization = () => {
 }
 
 module.exports = {
-    mode: production ? 'production' : 'development',
+    mode,
     target,
     devtool,
     entry: {
