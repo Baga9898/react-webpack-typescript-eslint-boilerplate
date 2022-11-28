@@ -2,6 +2,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin      = require('html-webpack-plugin');
 const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const path                   = require('path');
+const TerserWebpackPlugin    = require('terser-webpack-plugin');
 
 const production = process.env.NODE_ENV === 'production';
 const target     = !production ? 'web' : 'browserslist';
@@ -13,6 +14,13 @@ const optimization = () => {
             chunks: 'all',
         }
     }
+
+    if (production) {
+        config.minimizer = [
+            new TerserWebpackPlugin(),
+        ]
+    }
+
     return config;
 }
 
@@ -46,7 +54,7 @@ module.exports = {
     ],
     module: {
         rules: [
-            // CSS
+            // CSS & SASS
             {
                 test: /\.(c|sa|sc)ss$/,
                 use: [
