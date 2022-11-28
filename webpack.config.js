@@ -28,7 +28,9 @@ module.exports = {
     mode: production ? 'production' : 'development',
     target,
     devtool,
-    entry: path.resolve(__dirname, './src/index.js'),
+    entry: {
+        main: ['@babel/polyfill', path.resolve(__dirname, './src/index.js')]
+    },
     output: {
         filename: production ? '[name].[contenthash].js' : '[name].js',
         path: path.resolve(__dirname, './dist'),
@@ -54,6 +56,17 @@ module.exports = {
     ],
     module: {
         rules: [
+            // Babel
+            {
+                test: /\.m?js$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env'],
+                    }
+                }
+            },
             // CSS & SASS
             {
                 test: /\.(c|sa|sc)ss$/,
