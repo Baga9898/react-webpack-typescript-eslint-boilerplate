@@ -29,14 +29,14 @@ module.exports = {
     target,
     devtool,
     entry: {
-        main: ['@babel/polyfill', path.resolve(__dirname, './src/index.jsx')]
+        main: ['@babel/polyfill', path.resolve(__dirname, './src/index.tsx')]
     },
     output: {
         filename: production ? '[name].[contenthash].js' : '[name].js',
         path: path.resolve(__dirname, './dist'),
     },
     resolve: {
-        extensions: ['.js', '.json'],
+        extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
     optimization: optimization(),
     devServer: {
@@ -79,6 +79,13 @@ module.exports = {
                         plugins: ['@babel/plugin-proposal-class-properties'],
                     }
                 }
+            },
+            // TSX
+            {
+                test: /\.tsx?$/,
+                exclude: /node_modules/,
+                use: 'ts-loader',
+
             },
             // Babel React
             {
