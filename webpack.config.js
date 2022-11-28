@@ -29,7 +29,7 @@ module.exports = {
     target,
     devtool,
     entry: {
-        main: ['@babel/polyfill', path.resolve(__dirname, './src/index.js')]
+        main: ['@babel/polyfill', path.resolve(__dirname, './src/index.jsx')]
     },
     output: {
         filename: production ? '[name].[contenthash].js' : '[name].js',
@@ -56,7 +56,7 @@ module.exports = {
     ],
     module: {
         rules: [
-            // Babel
+            // Babel JS
             {
                 test: /\.m?js$/,
                 exclude: /node_modules/,
@@ -64,6 +64,31 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env'],
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                    }
+                }
+            },
+            // Babel TS
+            {
+                test: /\.ts$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
+                        plugins: ['@babel/plugin-proposal-class-properties'],
+                    }
+                }
+            },
+            // Babel React
+            {
+                test: /\.jsx$/,
+                exclude: /node_modules/,
+                use: {
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env', '@babel/preset-react'],
+                        plugins: ['@babel/plugin-proposal-class-properties'],
                     }
                 }
             },
