@@ -1,6 +1,7 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const ESLintWebpackPlugin    = require('eslint-webpack-plugin');
 const HtmlWebpackPlugin      = require('html-webpack-plugin');
+const ImageMinimizerPlugin   = require("image-minimizer-webpack-plugin");
 const MiniCssExtractPlugin   = require('mini-css-extract-plugin');
 const path                   = require('path');
 const TerserWebpackPlugin    = require('terser-webpack-plugin');
@@ -20,6 +21,26 @@ const optimization = () => {
     if (production) {
         config.minimizer = [
             new TerserWebpackPlugin(),
+            new ImageMinimizerPlugin({
+                minimizer: {
+                  implementation: ImageMinimizerPlugin.sharpMinify,
+                    options: {
+                        encodeOptions: {
+                            jpeg: {
+                              quality: 100,
+                            },
+                            webp: {
+                              lossless: true,
+                            },
+                            avif: {
+                              lossless: true,
+                            },
+                            png: {},
+                            gif: {},
+                        },
+                    },
+                },
+            }),
         ]
     }
 
