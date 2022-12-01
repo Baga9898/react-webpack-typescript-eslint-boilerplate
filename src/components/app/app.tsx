@@ -1,4 +1,4 @@
-import React from 'react';
+import React    from 'react';
 import checkImg from '../../assets/images/thunderStorm.png';
 
 import './app.scss';
