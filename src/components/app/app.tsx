@@ -7,9 +7,9 @@ const App: React.FC = () => {
     return (
         <>
             <h1 className='app'>Enjoy!</h1>
-            <img src={checkImg} alt="" />
+            <img src={checkImg} alt='' />
         </>
     );
-}
+};
 
 export default App;
