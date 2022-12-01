@@ -26,6 +26,16 @@ const optimization = () => {
     return config;
 }
 
+const eslintSwitcher = () => {
+    if (production) {
+        return;
+    } else {
+        return (new ESLintWebpackPlugin({
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
+        }));
+    }
+};
+
 module.exports = {
     mode,
     target,
@@ -55,55 +65,24 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: production ? '[name].[contenthash].css' : '[name].css',
         }),
-        new ESLintWebpackPlugin({
-            extensions: ['js', 'jsx', 'ts', 'tsx'],
-        })
+        eslintSwitcher(),
     ],
     module: {
         rules: [
-            // Babel JS
             {
-                test: /\.m?js$/,
+                test: /\.(ts|js)x?$/i,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                        plugins: ['@babel/plugin-proposal-class-properties'],
-                    }
+                  loader: "babel-loader",
+                  options: {
+                    presets: [
+                      "@babel/preset-env",
+                      "@babel/preset-react",
+                      "@babel/preset-typescript",
+                    ],
+                  }
                 }
-            },
-            // Babel TS
-            {
-                test: /\.ts$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-typescript'],
-                        plugins: ['@babel/plugin-proposal-class-properties'],
-                    }
-                }
-            },
-            // TSX
-            {
-                test: /\.tsx?$/,
-                exclude: /node_modules/,
-                use: 'ts-loader',
-
-            },
-            // Babel React
-            {
-                test: /\.jsx$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env', '@babel/preset-react'],
-                        plugins: ['@babel/plugin-proposal-class-properties'],
-                    }
-                }
-            },
+              },
             // CSS & SASS
             {
                 test: /\.(c|sa|sc)ss$/,
