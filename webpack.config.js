@@ -26,16 +26,6 @@ const optimization = () => {
     return config;
 }
 
-const eslintSwitcher = () => {
-    if (production) {
-        return;
-    } else {
-        return (new ESLintWebpackPlugin({
-            extensions: ['js', 'jsx', 'ts', 'tsx'],
-        }));
-    }
-};
-
 module.exports = {
     mode,
     target,
@@ -46,6 +36,7 @@ module.exports = {
     output: {
         filename: production ? '[name].[contenthash].js' : '[name].js',
         path: path.resolve(__dirname, './dist'),
+        assetModuleFilename: 'assets/[hash][ext]',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -65,10 +56,13 @@ module.exports = {
         new MiniCssExtractPlugin({
             filename: production ? '[name].[contenthash].css' : '[name].css',
         }),
-        eslintSwitcher(),
+        new ESLintWebpackPlugin({
+            extensions: ['js', 'jsx', 'ts', 'tsx'],
+        }),
     ],
     module: {
         rules: [
+            // Js|x, ts|x
             {
                 test: /\.(ts|js)x?$/i,
                 exclude: /node_modules/,
@@ -100,10 +94,21 @@ module.exports = {
                     'sass-loader',
                 ],
             },
-            // Images & fonts
+            // Fonts
             {
-                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|ico)(\?[a-z0-9=.]+)?$/,
-                use: ['file-loader'],
+                test: /\.(woff|woff2|eot|ttf)(\?[a-z0-9=.]+)?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/fonts/[name][ext]',
+                }
+            },
+            // Images
+            {
+                test: /\.(jpe?g|png|gif|svg|ico|webp)(\?[a-z0-9=.]+)?$/,
+                type: 'asset/resource',
+                generator: {
+                    filename: 'assets/images/[name][ext]',
+                }
             },
             // XML
             {
