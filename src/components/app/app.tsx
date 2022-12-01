@@ -6,8 +6,8 @@ import './app.scss';
 const App: React.FC = () => {
     return (
         <>
-            <h1 className='app'>Enjoy!</h1>
-            <img src={checkImg} alt='' />
+            <h1 className="app">Enjoy!</h1>
+            <img src={checkImg} alt="" />
         </>
     );
 };
