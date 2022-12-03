@@ -1,7 +1,7 @@
 {
   "name": "react-webpack-typescript-eslint-boilerplate",
   "version": "1.0.0",
-  "description": "Complete webpack template",
+  "description": "Complete react-webpack template with typescript eslint support",
   "main": "index.js",
   "author": "Bogdan Gushchin",
   "license": "ISC",

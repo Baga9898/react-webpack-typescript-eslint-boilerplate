@@ -1,14 +1,19 @@
-import React    from 'react';
-import checkImg from '../../assets/images/thunderStorm.png';
+import React           from 'react';
+import thunderStormImg from '../../assets/images/thunderStorm.png';
 
 import './app.scss';
 
 const App: React.FC = () => {
     return (
-        <>
-            <h1 className="app">Enjoy!</h1>
-            <img src={checkImg} alt="" />
-        </>
+        <div className="app">
+            <div className="app__upside">
+                <h1>Enjoy!</h1>
+                <img src={thunderStormImg} alt="Cute cloud" />
+            </div>
+            <div>
+                <h3>{'Do good =)=)'}</h3>
+            </div>
+        </div>
     );
 };
 

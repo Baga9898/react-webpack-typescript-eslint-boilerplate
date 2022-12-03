@@ -1,3 +1,24 @@
 .app {
+    width: 100vw;
+    height: 100vh;
     color: #fff;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+
+    &__upside {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+
+        h1 {
+            margin-right: 10px;
+            text-transform: uppercase;
+        }
+
+        img {
+            height: 24px;
+        }
+    }
 }
