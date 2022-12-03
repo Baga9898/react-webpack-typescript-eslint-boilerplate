@@ -49,6 +49,14 @@ When executing this script, ESLint checks if it can fix the found rule inconsist
 </br>
 It does not fix everything, for example, the console.log will not be removed because ESLint does not know if you need it.
 
+## Plugins
+- [html-webpack-plugin](https://github.com/jantimon/html-webpack-plugin) - Generate HTML files from template
+- [clean-webpack-plugin](https://github.com/johnagan/clean-webpack-plugin) - Remove/clean build folders
+- [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) - Extract CSS into separate files
+- [eslint-webpack-plugin](https://github.com/webpack-contrib/eslint-webpack-plugin) - Find and fix problems in JavaScript code
+- [terser-webpack-plugin](https://github.com/webpack-contrib/terser-webpack-plugin) - Minify/minimize your JavaScript
+- [image-minimizer-webpack-plugin](https://github.com/webpack-contrib/image-minimizer-webpack-plugin) - optimize (compress) all images
+
 </br>
 Do good.</br>
 =)=)
