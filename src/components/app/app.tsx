@@ -10,9 +10,9 @@ const App: React.FC = () => {
                 <h1>Enjoy!</h1>
                 <img src={thunderStormImg} alt="Cute cloud" />
             </div>
-            <div>
+            <>
                 <h3>{'Do good =)=)'}</h3>
-            </div>
+            </>
         </div>
     );
 };
