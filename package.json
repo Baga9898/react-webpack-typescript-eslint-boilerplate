@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Complete react-webpack template with typescript eslint support",
   "main": "index.js",
-  "author": "Bogdan Gushchin",
   "license": "ISC",
   "keywords": [
     "webpack",
@@ -71,9 +70,5 @@
     "last 2 versions",
     "not dead",
     "> 0.5%"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Baga9898/react-webpack-typescript-eslint-boilerplate"
-  }
+  ]
 }
